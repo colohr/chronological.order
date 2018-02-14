@@ -1,0 +1,68 @@
+fragment annual_calendar_complete on AnnualCalendar{
+    quarter{ ...annual_calendar_quarter_complete }
+}
+
+fragment annual_calendar_quarter_complete on AnnualCalendarQuarter{
+    id
+    months
+    value
+}
+
+fragment chronological_date_complete on ChronologicalDate{
+    date{ ...coordinated_universal_time_complete }
+    input{ ...chronological_input_value_complete }
+    list
+}
+
+fragment chronological_input_value_complete on ChronologicalInputValue{
+    date
+    type
+    valid
+    value
+}
+
+fragment coordinated_universal_time_complete on CoordinatedUniversalTime {
+    annual{ ...annual_calendar_complete }
+    date {
+        ...js_date_complete
+    }
+    inputs
+    iso
+    time {
+        ...js_time_complete
+    }
+    text
+    to {
+        ...coordinated_universal_time_format_complete
+    }
+    utc
+}
+
+fragment coordinated_universal_time_format_complete on CoordinatedUniversalTimeFormat {
+    day
+    era
+    clock
+    hour
+    minute
+    month
+    second
+    time_zone_name
+    weekday
+    year
+}
+
+fragment js_time_complete on JavaScriptTime {
+    hour
+    millisecond
+    minute
+    timezone_offset
+    second
+    stamp
+}
+
+fragment js_date_complete on JavaScriptDate {
+    day
+    day_of_the_week
+    month
+    year
+}

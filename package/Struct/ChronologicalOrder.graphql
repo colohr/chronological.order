@@ -1,0 +1,176 @@
+#Annual information relative to a date
+type AnnualCalendar{
+    #Quarter information using JavaScript Date month index
+    quarter: AnnualCalendarQuarter
+}
+
+#Quarter information using JavaScript Date month index
+type AnnualCalendarQuarter{
+    #Identifier for the quarter (Q1...Q4)
+    id: ID
+    #Month names in the quarter
+    months(locale: ID): [Text]
+    #Number value for the quarter
+    value: Number
+}
+
+#Date information supporting multiple types of input values
+type ChronologicalDate implements UTC{
+    #Resolved if input contains a valid date or 1 can be interpreted from the input text
+    date: CoordinatedUniversalTime
+    #Resolved if input contains a valid date or 1 can be interpreted from the input text
+    input: ChronologicalInputValue
+    #Interprets dates from natural language phrases using the "date" value as a reference point
+    interpret(text: Text!): ChronologicalDate
+    #Date list of valid JavaScript Dates interpreted from input value resolving to Date.toString()
+    list: [ID]
+}
+
+#Value information for input value passed to construct Chronological Date
+type ChronologicalInputValue{
+    #JavaScript Date instance from input value resolving to Date.toString()
+    date: ID
+    #Type of value type provided in input
+    type: ChronologicalInputValueType!
+    #Input value provided is a valid JavaScript Date instance
+    valid: TF!
+    #Value used to resolve a JavaScript Date instance
+    value: Any
+}
+
+#Value descriptor of mutliple value types used when creating JavaScript Date instances
+enum ChronologicalInputValueType{
+    #The input value is a valid array of numeric values representing a date
+    array
+    #The input value is a valid JavaScript Date
+    date
+    #The input value is not valid to create a JavaScript Date
+    invalid
+    #The input value is valid text representing a date
+    text
+    #The input value is a valid number representing time
+    timestamp
+}
+
+#Values of date & time using UTC standard
+type CoordinatedUniversalTime{
+    #Annual information relative to a date
+    annual: AnnualCalendar
+    #Date values in UTC
+    date: JavaScriptDate!
+    #Format date with option for locale language (en-US) & time zone name (America/Chicago)
+    format(locale:ID, timezone: ID): CoordinatedUniversalTimeFormat
+    #Input list in order to create new dates
+    inputs: [Number]
+    #Value in ISO 8601 text
+    iso: ID!
+    #Time values in UTC
+    time: JavaScriptTime!
+    #Text value using of UTC date
+    text: ID!
+    #Date to formatted word or text values
+    to: CoordinatedUniversalTimeFormat
+    #A number representing the number of milliseconds in the given Date object since January 1, 1970, 00:00:00, universal time
+    utc: Decimal!
+}
+
+#Values of date & time in text
+type CoordinatedUniversalTimeFormat{
+    #2 digit text representation
+    day: Text
+    #Year & full name of era
+    era: Text
+    #2 digit + suffix time representation (12 AM)
+    clock: Text
+    #2 digit text representation
+    hour: Text
+    #2 digit text representation
+    minute: Text
+    #Full name of month
+    month: Text
+    #2 digit text representation
+    second: Text
+    #Date + full name of time zone
+    time_zone_name: Text
+    #Full name of weekday
+    weekday: Text
+    #4 digit text representation
+    year: Text
+}
+
+#JavaScript Date class UTC numeric values for dates
+type JavaScriptDate{
+    #Day of the month (1-31) in the specified date according to universal time
+    day: Number
+    #Day of the week (0-6) in the specified date according to universal time
+    day_of_the_week: Number
+    #Month (0-11) in the specified date according to universal time
+    month: Number
+    #Year (4 digits for 4-digit years) in the specified date according to universal time
+    year: Number
+}
+
+#JavaScript Date class UTC numeric values for times
+type JavaScriptTime{
+    #Hours (0-23) in the specified date according to universal time
+    hour: Number
+    #Milliseconds (0-999) in the specified date according to universal time
+    millisecond: Number
+    #Minutes (0-59) in the specified date according to universal time
+    minute: Number
+    #Time-zone offset in minutes for the current locale
+    timezone_offset: Number
+    #Seconds (0-59) in the specified date according to universal time
+    second: Number
+    #Numeric value of the specified date as the number of milliseconds since January 1, 1970, 00:00:00 UTC (negative for prior times)
+    stamp: Decimal
+}
+
+#Interface for types containing a Coordinated Universal Time value for more details of date
+interface UTC{
+    #Resolved from a valid JavaScript Date instance
+    date: CoordinatedUniversalTime
+}
+
+type CalendarCycle{
+    multiple: TF
+    recurring: TF
+    type: CalendarRecurringCycle
+}
+
+type CalendarDate{
+    cycle: CalendarCycle
+    date: ID
+    description: Text
+    name: Text
+    location: Text
+    time: Time
+    timestamp: Timestamp
+    type: CalendarDateType
+}
+
+enum CalendarRecurringCycle{
+    annual
+    bi_annual
+    is_done
+    not_applicable
+    not_specified
+    quarterly
+    once
+    ongoing
+    TBA
+    varies
+}
+
+enum CalendarDateType{
+    apply
+    available
+    deadline
+    end
+    ETA
+    general
+    start
+}
+
+
+

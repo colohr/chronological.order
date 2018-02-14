@@ -1,0 +1,39 @@
+type CalendarCycle{
+    multiple: TF
+    recurring: TF
+    type: CalendarRecurringCycle
+}
+
+type CalendarDate{
+    cycle: CalendarCycle
+    date: ID
+    description: Text
+    name: Text
+    location: Text
+    time: Time
+    timestamp: Timestamp
+    type: CalendarDateType
+}
+
+enum CalendarRecurringCycle{
+    annual
+    bi_annual
+    is_done
+    not_applicable
+    not_specified
+    quarterly
+    once
+    ongoing
+    TBA
+    varies
+}
+
+enum CalendarDateType{
+    apply
+    available
+    deadline
+    end
+    ETA
+    general
+    start
+}
