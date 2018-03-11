@@ -7,7 +7,7 @@ class Chronologic{
 		if(fxy.is.array(input) && text_interpretation in input) input = get_interpreted_text_value_date(input)
 		this.input = utility.value(input)
 		if(!this.input.valid && fxy.is.text(input)) this.text_interpretation = utility.chronology.parse(input)
-		console.dir(this,{colors:true,depth:5,showHidden:true})
+		//console.dir(this,{colors:true,depth:5,showHidden:true})
 	}
 	get date(){ return this.date_value() }
 	date_value(){ return get_date(this) }

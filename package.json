@@ -1,6 +1,6 @@
 {
   "name": "chronological.order",
-  "version": "0.0.11",
+  "version": "0.0.113",
   "description": "Chronological Order Tool",
   "main": "package/index.js",
   "repository": {

@@ -21,6 +21,14 @@ fragment chronological_input_value_complete on ChronologicalInputValue{
     value
 }
 
+fragment coordinated_timezone_complete on CoordinatedTimezone{
+    daylight_savings_time_offset
+    id
+    name
+    offset
+    status
+}
+
 fragment coordinated_universal_time_complete on CoordinatedUniversalTime {
     annual{ ...annual_calendar_complete }
     date {

@@ -17,7 +17,7 @@ const expressions = [
 const is_valid_date = date=>isNaN(date.getTime()) !== true
 const is_valid_object = date=>Object.prototype.toString.call(date) === "[object Date]"
 const is_valid_text = text=>{
-	for(const type of expressions.date) if(type.test(text)) return true
+	for(const type of expressions) if(type.test(text)) return true
 	return false
 }
 

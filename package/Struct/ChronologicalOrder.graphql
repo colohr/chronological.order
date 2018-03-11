@@ -52,6 +52,20 @@ enum ChronologicalInputValueType{
     timestamp
 }
 
+#On demand timezone details for location coordinates
+type CoordinatedTimezone{
+    #Offset for daylight-savings time in seconds.
+    daylight_savings_time_offset: Number
+    #Unicode Common Locale Data ID of the time zone.
+    id:ID
+    #The long form name of the time zone. This field will be localized if the language parameter is set.
+    name: Text
+    #The offset from UTC in seconds for the given location. This does not take into effect daylight savings.
+    offset: Number
+    #Google Maps Time Zone API status code
+    status: ID
+}
+
 #Values of date & time using UTC standard
 type CoordinatedUniversalTime{
     #Annual information relative to a date
